@@ -47,6 +47,12 @@ As above, **removing** sourcesanspro and sourcecodepro from css asset filenames
 
 ## Or run with docker
 
+#### Build
+
 `docker build -t css-asset-dl .`
+
+#### Run - docker will fire up the container, download and rewrite the CSS into a folder (css) in the current host directory.
+
 `docker run -it --name css-asset-dl -v ${pwd}/css:/usr/src/css_asset_dl/css --rm css-asset-dl php parse.php https://ds.fusioncharts.com/2.0.42/css/ds.css sourcecode,sourcesans code,sans`
+
 
