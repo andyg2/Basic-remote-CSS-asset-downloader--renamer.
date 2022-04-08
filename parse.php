@@ -5,29 +5,6 @@ define('FONTS_DIR', './fonts/');
 define('ICONS_DIR', './icons/');
 define('IMAGES_DIR', './img/');
 
-
-/**
- * Usage: php  .\parse.php remote_css_url [strings,to,replace replacement]/[strings,to,replace replacement,string,sequence]
- * 
- * arg-1: (required) URL of CSS
- * arg-2: (otional) filename text search
- * arg-3: (otional / require if arg-2 is present) filename text replacement
- * 
- * Minimum
- * Example: php .\parse.php https://ds.fusioncharts.com/2.0.42/css/ds.css
- * 
- * Rename downloaded files from *sourcesanspro*.* to *dgtepro*.*
- * Example: php .\parse.php https://ds.fusioncharts.com/2.0.42/css/ds.css sourcesanspro dgtepro
- * 
- * Rename downloaded files from *sourcesanspro*.* to *sanspro*.* and *sourcecodepro*.* to *codepro*.*
- * Example: php .\parse.php https://ds.fusioncharts.com/2.0.42/css/ds.css sourcesanspro,sourcecodepro sanspro,codepro
- * 
- * REmove sourcesanspro and sanspro from all filenames
- * Example: php .\parse.php https://ds.fusioncharts.com/2.0.42/css/ds.css sourcesanspro,sourcecodepro
- * 
- */
-
-
 if (isset($argv[1]) && !empty($argv[1])) {
   if (filter_var($argv[1], FILTER_VALIDATE_URL)) {
 
