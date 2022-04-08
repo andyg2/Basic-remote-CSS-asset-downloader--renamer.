@@ -1,9 +1,10 @@
 <?php
 
 // Paths: Relative local path with trailing slash
-define('FONTS_DIR', './fonts/');
-define('ICONS_DIR', './icons/');
-define('IMAGES_DIR', './img/');
+define('FONTS_DIR', 'css/fonts');
+define('ICONS_DIR', 'css/icons');
+define('IMAGES_DIR', 'css/img');
+define('MAIN_DIR', 'css');
 
 if (isset($argv[1]) && !empty($argv[1])) {
   if (filter_var($argv[1], FILTER_VALIDATE_URL)) {
@@ -25,7 +26,7 @@ if (isset($argv[1]) && !empty($argv[1])) {
 
 
     if (!empty($css_filename)) {
-      $css_filename .= '.css';
+      $css_filename = MAIN_DIR . '/' . $css_filename . '.css';
       $file_contents = file_get_contents($css_url);
 
       $pattern = '/url\(([^)]*)\)/';
@@ -78,22 +79,22 @@ if (isset($argv[1]) && !empty($argv[1])) {
 
 
               default:
-                $subdir = './';
+                $subdir = MAIN_DIR;
                 break;
             }
 
 
-            if ($subdir != './') {
-              if (!is_dir($subdir)) {
-                mkdir($subdir, 0755, true);
-              }
+
+            if (!is_dir($subdir)) {
+              mkdir($subdir, 0755, true);
             }
+
 
             // rewrite any filenames
             $basename = str_replace($filename['find'], $filename['replace'], $basename);
 
             // concat local path
-            $local_filepath = $subdir . $basename;
+            $local_filepath = $subdir . '/' . $basename;
 
 
             if ($four != 'http') { // not a url
@@ -109,7 +110,7 @@ if (isset($argv[1]) && !empty($argv[1])) {
               $r['urls'][$local_filepath] = $uri;
             }
 
-            $r['rewrites'][$local_filepath] = $uri;
+            $r['rewrites'][str_replace('css/', '', $local_filepath)] = $uri;
           }
         }
       }
